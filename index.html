@@ -386,57 +386,33 @@
     <!-- Email Configuration Modal -->
     <div class="modal" id="emailConfigModal">
       <div class="modal-box config-modal">
-        <div class="modal-icon">📧</div>
-        <h2>Email Configuration</h2>
-        <p>Configure your email service to send assignments</p>
+        <div class="modal-icon">🎅</div>
+        <h2>Ready to Send!</h2>
+        <p>Shuffle assignments and send emails to all participants?</p>
 
         <div class="config-form">
-          <div id="emailjsConfig">
-            <div class="form-group">
-              <label for="serviceId">EmailJS Service ID</label>
-              <input
-                type="text"
-                id="serviceId"
-                placeholder="Enter your EmailJS Service ID"
-              />
+          <div class="config-info">
+            <div class="info-item">
+              <span class="info-icon">👥</span>
+              <span id="participantSummary">participants ready</span>
             </div>
-            <div class="form-group">
-              <label for="templateId">EmailJS Template ID</label>
-              <input
-                type="text"
-                id="templateId"
-                placeholder="Enter your EmailJS Template ID"
-              />
-            </div>
-            <div class="form-group">
-              <label for="publicKey">EmailJS Public Key</label>
-              <input
-                type="text"
-                id="publicKey"
-                placeholder="Enter your EmailJS Public Key"
-              />
-            </div>
-            <div class="config-hint">
-              📌 Get these from
-              <a href="https://www.emailjs.com/" target="_blank">emailjs.com</a>
-              (Free tier available)
+            <div class="info-item">
+              <span class="info-icon">📧</span>
+              <span>Emails sent from Coditas Gmail</span>
             </div>
           </div>
 
           <div class="config-buttons">
             <button class="btn-secondary" id="configCancelBtn">Cancel</button>
-            <button class="btn-test" id="configTestBtn">
-              🧪 Test Mode (Show Links)
-            </button>
+            <button class="btn-test" id="configTestBtn">🧪 Test Mode</button>
             <button class="btn-primary" id="configProceedBtn">
-              Proceed with Shuffle
+              🎲 Shuffle & Send
             </button>
           </div>
         </div>
       </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

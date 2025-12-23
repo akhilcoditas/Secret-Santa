@@ -425,6 +425,11 @@ function openEmailConfigModal() {
     return;
   }
 
+  // Update participant summary in modal
+  document.getElementById(
+    "participantSummary"
+  ).textContent = `${participants.length} participants ready`;
+
   document.getElementById("emailConfigModal").classList.add("active");
 }
 
@@ -436,7 +441,7 @@ async function proceedWithShuffle() {
   document.getElementById("emailConfigModal").classList.remove("active");
 
   // Only send emails - no one can see the assignments!
-  await sendEmailsWithEmailJS(assignments);
+  await sendEmailsWithGoogleScript(assignments);
 }
 
 // ============================================
@@ -494,19 +499,10 @@ function testModeShowLinks() {
   document.body.appendChild(testPanel.firstElementChild);
 }
 
-async function sendEmailsWithEmailJS(assignments) {
-  const serviceId = document.getElementById("serviceId").value.trim();
-  const templateId = document.getElementById("templateId").value.trim();
-  const publicKey = document.getElementById("publicKey").value.trim();
-
-  if (!serviceId || !templateId || !publicKey) {
-    alert("Please fill in all EmailJS configuration fields.");
-    document.getElementById("emailConfigModal").classList.add("active");
-    return;
-  }
-
-  // Initialize EmailJS
-  emailjs.init(publicKey);
+async function sendEmailsWithGoogleScript(assignments) {
+  // Hardcoded Google Apps Script URL for Coditas Secret Santa
+  const scriptUrl =
+    "https://script.google.com/macros/s/AKfycbzIwzm8Vq4GsH2MWfvL9r2-VDtbP65erYng5-2m-WP77SO1r9XNC_tjuOzsEgMlvanzOQ/exec";
 
   const shuffleBtn = document.getElementById("shuffleBtn");
   shuffleBtn.disabled = true;
@@ -529,14 +525,21 @@ async function sendEmailsWithEmailJS(assignments) {
       );
       const revealLink = `${baseUrl}?reveal=${encodedData}`;
 
-      await emailjs.send(serviceId, templateId, {
-        to_name: assignment.giver.name,
-        to_email: assignment.giver.email,
-        from_name: "Coditas Secret Santa",
-        reveal_link: revealLink,
-        budget_range: "₹500 - ₹1000",
-        event_date: "5th January 2026",
+      // Send to Google Apps Script
+      const response = await fetch(scriptUrl, {
+        method: "POST",
+        mode: "no-cors", // Required for Apps Script
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          to_name: assignment.giver.name,
+          to_email: assignment.giver.email,
+          reveal_link: revealLink,
+        }),
       });
+
+      // With no-cors, we can't read the response, so we assume success
       successCount++;
     } catch (error) {
       console.error("Email failed:", error);

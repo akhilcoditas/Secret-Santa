@@ -1496,6 +1496,30 @@ body {
   box-shadow: 0 8px 25px rgba(147, 51, 234, 0.3);
 }
 
+.config-info {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.info-item:first-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.info-icon {
+  font-size: 20px;
+}
+
 /* Assignments Modal */
 .assignments-modal {
   max-width: 600px;
