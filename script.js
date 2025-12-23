@@ -502,7 +502,7 @@ function testModeShowLinks() {
 async function sendEmailsWithGoogleScript(assignments) {
   // Hardcoded Google Apps Script URL for Coditas Secret Santa
   const scriptUrl =
-    "https://script.google.com/macros/s/AKfycbzIwzm8Vq4GsH2MWfvL9r2-VDtbP65erYng5-2m-WP77SO1r9XNC_tjuOzsEgMlvanzOQ/exec";
+    "";
 
   const shuffleBtn = document.getElementById("shuffleBtn");
   shuffleBtn.disabled = true;
